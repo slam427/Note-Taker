@@ -7,6 +7,12 @@ var $noteList = $(".list-container .list-group");
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
 
+
+// var reload = document.getElementById('reload')
+// reload.onclick = function(){
+// window.location.reload();
+// }
+
 // A function for getting all notes from the db
 var getNotes = function() {
   return $.ajax({
@@ -46,7 +52,7 @@ var renderActiveNote = function() {
     $noteText.attr("readonly", false);
     $noteTitle.val("");
     $noteText.val("");
-  }
+  };
 };
 
 // Get the note data from the inputs, save it to the db and update the view
@@ -138,7 +144,8 @@ $newNoteBtn.on("click", handleNewNoteView);
 $noteList.on("click", ".delete-note", handleNoteDelete);
 $noteTitle.on("keyup", handleRenderSaveBtn);
 $noteText.on("keyup", handleRenderSaveBtn);
-
+console.log("check on delete button", $noteList.on("click", ".delete-note", handleNoteDelete));
 // Gets and renders the initial list of notes
 getAndRenderNotes();
+
 
