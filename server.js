@@ -24,38 +24,31 @@ app.get("/api/notes", function (req, res) {
     res.json(db);
 });
 
+let x = 0
 app.post("/api/notes", function (req, res) {
-    req.body.id = db.length;
+    req.body.id = x;
     db.push(req.body);
     res.json(db);
     let writeToDb = JSON.stringify(db);
     // err - call back function
     fs.writeFile("./db.json", writeToDb, err => {
         if (err) throw err;
+        x++;
     });
 });
 
 app.delete("/api/notes/:id", function (req, res) {
     const noteId = parseInt(req.params.id);
-
+    //solved one issue to get another...adding new note can duplicate existing ids...
     let unwantedNote = db.filter(function(chosen) {
         if(parseInt(chosen.id) === noteId) {
             db.splice(db[noteId].id, 1);
-            db.length++;
         }
-        else{
-            return "something is broken here"
+        else {
+            return "delete function broken."
         }
-
     });
-    console.log("check on noteId value",noteId);
-    console.log("check on unwanted note", unwantedNote);
-    // deletes multiple entries due to loop....how to avoid?? other mthods?
-    //     for (let i = 0; i < db.length; i++) {
-    //             if (deletedNote === db[i].id) {
-    //                 db.splice(db[i], 1);
-    //     }
-    // }
+
     res.json(db);
     let writeToDb = JSON.stringify(db);
     fs.writeFile("./db.json", writeToDb, err => {
