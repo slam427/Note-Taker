@@ -1,4 +1,4 @@
-# Unit 11 Express Homework: Note Taker
+# Note Taker App
 
 ![note taker app main page](/images/main.png)
 ![note taker app notes page](/images/notes.png)
