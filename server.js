@@ -34,7 +34,7 @@ app.post("/api/notes", function (req, res) {
 app.delete("/api/notes/:id", function (req, res) {
     const noteId = parseInt(req.params.id);
     db.forEach((note, i) => {
-        if(note.id == noteId) {
+        if(note.id === noteId) {
             db.splice(i, 1)
         }
     });
